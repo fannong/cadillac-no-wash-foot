@@ -1,0 +1,41 @@
+{
+  "name": "egg-example-zfr",
+  "version": "1.0.0",
+  "description": "egg实操",
+  "private": true,
+  "egg": {
+    "declarations": true
+  },
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "egg": "^3.17.5",
+    "egg-mysql": "^4.0.0",
+    "egg-scripts": "2",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "egg-bin": "6",
+    "egg-mock": "5",
+    "eslint": "8",
+    "eslint-config-egg": "13"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "egg-scripts start --daemon --title=egg-server-egg-example-zfr",
+    "stop": "egg-scripts stop --title=egg-server-egg-example-zfr",
+    "dev": "egg-bin dev",
+    "test": "npm run lint -- --fix && npm run test:local",
+    "test:local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "zengfr",
+  "license": "MIT"
+}
