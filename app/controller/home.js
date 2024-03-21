@@ -20,14 +20,14 @@ class HomeController extends Controller {
       port: 465,
       secure: true,
       auth: {
-        user: "miaowu11@163.com",
+        user: "miaowu12@163.com",
         pass: "HMDJXCHHYITNRQDS",
       },
     });
 
     // 创建一个邮件对象
     const mail = {
-      from: "miaowu11@163.com", // 发件人邮箱地址
+      from: "miaowu12@163.com", // 发件人邮箱地址
       to: email, // 收件人邮箱地址，多个邮箱地址用逗号隔开
       subject: "【验证码】来自凡农哥哥", // 邮件标题
       text: `您即将注册【凡农哥哥】的个人网站，成为尊贵的用户,你的验证码是：${code}`, // 邮件内容
@@ -39,6 +39,7 @@ class HomeController extends Controller {
           if (error) {
             reject(error);
           } else {
+            // 在发送成功时，将邮箱和验证码临时存在redis中
             resolve(info);
           }
         });
