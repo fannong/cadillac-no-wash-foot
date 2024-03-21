@@ -55,6 +55,14 @@ class HomeController extends Controller {
     const userRowDataPacket = await this.app.mysql.get("my_new_table", {
       username: username,
     });
+    if (!userRowDataPacket) {
+      ctx.body = {
+        code: 401,
+        data: null,
+        msg: "username or password is incorrect",
+      };
+      return;
+    }
 
     if (userRowDataPacket) {
       // 第二部：比较密码是否正确
@@ -67,13 +75,13 @@ class HomeController extends Controller {
         };
         return;
       }
-      
+
       const saltedHash = crypto
         .pbkdf2Sync(password, salt, 1000, 64, `sha512`)
         .toString(`hex`);
 
       if (saltedHash === userRowDataPacket.password) {
-        const token = jwt.sign({ username }, "secret", { expiresIn: "1h" });
+        const token = jwt.sign({ username }, "secret", { expiresIn: "5s" });
         ctx.body = {
           code: 200,
           data: {
@@ -88,6 +96,26 @@ class HomeController extends Controller {
           msg: "username or password is incorrect",
         };
       }
+    }
+  }
+
+  // todo  加入refresh token
+  async tokenValid() {
+    const { ctx } = this;
+    const { token } = ctx.request.body;
+    try {
+      const decoded = jwt.verify(token, "secret");
+      ctx.body = {
+        code: 200,
+        data: decoded,
+        msg: "token is valid",
+      };
+    } catch (error) {
+      ctx.body = {
+        code: 401,
+        data: null,
+        msg: "token is invalid",
+      };
     }
   }
 

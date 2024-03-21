@@ -9,4 +9,5 @@ module.exports = app => {
   router.get('/first', controller.home.getFirst);
   router.post('/login', controller.home.login);
   router.post('/register', controller.home.register);
+  router.post('/tokenValid', controller.home.tokenValid);
 };
