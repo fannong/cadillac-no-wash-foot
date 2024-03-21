@@ -10,4 +10,5 @@ module.exports = app => {
   router.post('/login', controller.home.login);
   router.post('/register', controller.home.register);
   router.post('/tokenValid', controller.home.tokenValid);
+  router.post('/email/valid', controller.home.sendEmail);
 };

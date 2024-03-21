@@ -11,7 +11,8 @@
     "egg": "^3.17.5",
     "egg-mysql": "^4.0.0",
     "egg-scripts": "2",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.13"
   },
   "devDependencies": {
     "egg-bin": "6",

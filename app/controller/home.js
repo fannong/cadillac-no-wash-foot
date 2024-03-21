@@ -1,11 +1,62 @@
 const { Controller } = require("egg");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
+const nodemailer = require("nodemailer");
 
 class HomeController extends Controller {
   async index() {
     const { ctx } = this;
     ctx.body = "hi, egg, success";
+  }
+
+  async sendEmail() {
+    const { ctx } = this;
+    const { email } = ctx.request.body;
+    // 创建验证码
+    const code = Math.random().toString(36).slice(-6);
+
+    const transporter = nodemailer.createTransport({
+      service: "163",
+      port: 465,
+      secure: true,
+      auth: {
+        user: "miaowu11@163.com",
+        pass: "HMDJXCHHYITNRQDS",
+      },
+    });
+
+    // 创建一个邮件对象
+    const mail = {
+      from: "miaowu11@163.com", // 发件人邮箱地址
+      to: email, // 收件人邮箱地址，多个邮箱地址用逗号隔开
+      subject: "【验证码】来自凡农哥哥", // 邮件标题
+      text: `您即将注册【凡农哥哥】的个人网站，成为尊贵的用户,你的验证码是：${code}`, // 邮件内容
+    };
+    // 发送邮件
+    try {
+      const info = await new Promise((resolve, reject) => {
+        transporter.sendMail(mail, (error, info) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(info);
+          }
+        });
+      });
+      ctx.body = {
+        data: info,
+        success: true,
+        msg: "success",
+        code: 200,
+      };
+    } catch (error) {
+      ctx.body = {
+        data: info,
+        success: false,
+        msg: "fail",
+        code: 500,
+      };
+    }
   }
 
   async register() {
