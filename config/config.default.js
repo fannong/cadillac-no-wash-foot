@@ -18,6 +18,14 @@ module.exports = (appInfo) => {
 
   // add your user config here
   const userConfig = {
+    redis: {
+      client: {
+        port: 6379,
+        host: "127.0.0.1",
+        password: "",
+        db: 0,
+      },
+    },
     mysql: {
       // 单数据库信息配置
       client: {
