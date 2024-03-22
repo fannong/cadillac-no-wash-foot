@@ -14,7 +14,7 @@ module.exports = (appInfo) => {
   config.keys = appInfo.name + "_1709797928456_6998";
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = ["cors", "trace"];
 
   // add your user config here
   const userConfig = {
@@ -46,14 +46,7 @@ module.exports = (appInfo) => {
       agent: false,
     },
     development: {
-      watchDirs: [
-        "app",
-        "lib",
-        "config",
-        "app.js",
-        "agent.js",
-        "config.default.js",
-      ],
+      watchDirs: ["app", "lib", "config", "app.js", "agent.js", "config.default.js"],
       overrideDefault: true,
     },
 
