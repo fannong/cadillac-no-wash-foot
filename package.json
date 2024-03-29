@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "egg实操",
   "private": true,
-
   "egg": {
     "declarations": true
   },
@@ -13,6 +12,7 @@
     "egg-mysql": "^4.0.0",
     "egg-redis": "^2.5.0",
     "egg-scripts": "2",
+    "egg-validate": "^2.0.2",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.9.13"
   },
