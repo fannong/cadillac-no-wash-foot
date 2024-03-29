@@ -18,6 +18,15 @@ module.exports = (appInfo) => {
 
   // add your user config here
   const userConfig = {
+    security: {
+      csrf: {
+        enable: true, // egg默认开启csrfToken校验
+      },
+    },
+    validate: {
+      // convert: false,
+      // validateRoot: false,
+    },
     redis: {
       client: {
         port: 6379,

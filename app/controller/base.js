@@ -3,6 +3,15 @@ const Controller = require("egg").Controller;
 // 在 BaseController 中添加一个 tractId 属性，然后在构造函数中生成一个 tractId，这样每个请求都会有一个独立的 tractId。
 
 class BaseController extends Controller {
+  tryCatch(fn) {
+    try {
+      return fn();
+    } catch (error) {
+      this.ctx.logger.error(error);
+      this.fail(error, "fail", 500);
+    }
+  }
+
   success(data, message) {
     this.ctx.body = {
       code: 200,

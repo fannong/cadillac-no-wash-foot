@@ -10,7 +10,6 @@ const {
 } = require("../../config/constants");
 
 class UserController extends BaseController {
-
   async sendEmail() {
     const { ctx } = this;
     const { email } = ctx.request.body;
@@ -36,22 +35,19 @@ class UserController extends BaseController {
     };
 
     // 发送邮件
-    try {
-      const res = await new Promise((resolve, reject) => {
-        transporter.sendMail(mail, (error, info) => {
-          if (error) {
-            reject(error);
-          } else {
-            // 在发送成功时，将邮箱和验证码临时存在redis中
-            this.ctx.service.user.storeEmailCode(email, code);
-            info ? resolve(info) : resolve({ data: "出错了" });
-          }
-        });
+
+    const res = await new Promise((resolve, reject) => {
+      transporter.sendMail(mail, (error, info) => {
+        if (error) {
+          reject(error);
+        } else {
+          // 在发送成功时，将邮箱和验证码临时存在redis中
+          this.ctx.service.user.storeEmailCode(email, code);
+          info ? resolve(info) : resolve({ data: "出错了" });
+        }
       });
-      this.success(res, "success");
-    } catch (error) {
-      this.fail(error, "fail", 500);
-    }
+    });
+    this.success(res, "success");
   }
 
   async register() {
@@ -85,10 +81,10 @@ class UserController extends BaseController {
 
       // 查询在库用户名判断 注册的用户名和邮箱是否重复
       const sql = `
-  SELECT * FROM ??
-  WHERE username = ? OR email = ?
-  LIMIT 1
-`;
+    SELECT * FROM ??
+    WHERE username = ? OR email = ?
+    LIMIT 1
+  `;
       const userRowDataPacket = await this.app.mysql.query(sql, [theUserTable, username, email]);
       console.log(userRowDataPacket, "userRowDataPacket");
       if (userRowDataPacket) {
@@ -130,7 +126,7 @@ class UserController extends BaseController {
 
       const saltedHash = crypto.pbkdf2Sync(password, salt, 1000, 64, `sha512`).toString(`hex`);
       if (saltedHash === userRowDataPacket.password) {
-        const token = jwt.sign({ username }, "secret", { expiresIn: "5s" });
+        const token = jwt.sign({ username }, "secret", { expiresIn: "1h" });
         this.success({ token }, "login success");
       } else {
         this.fail(401, "username or password is incorrect");
