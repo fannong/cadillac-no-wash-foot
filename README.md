@@ -66,4 +66,5 @@ npm stop
 - jenkins初始密码：c5bd5af9a75c46569b008edfcbe832be
 
 ### node服务如何排查线上问题
-- 打印出来的console如何查看。如何debugger线上代码？
+- 打印出来的console如何查看。
+    如何debugger线上代码？
