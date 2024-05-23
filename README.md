@@ -53,4 +53,15 @@ npm stop
 - 问：查看云服务器上的Jenkins是否已经启动
 - 答：sudo systemctl status jenkins
 
+- 问: 如何重置mysql密码
+
+- 问：查看mysql端口是否正在被占用
+- 答：sudo netstat -tuln | grep 3306 
+- tcp 表示连接类型。
+- 第一个 0 表示接收队列（recv-q）中的数据量，第二个 0 表示发送队列（send-q）中的数据量。
+- 127.0.0.1:3306 是本地地址和端口，表示 MySQL 正在这个地址和端口上监听连接。
+- 0.0.0.0:* 是远程地址和端口，* 表示任何地址和端口。
+- LISTEN 表示 MySQL 正在监听连接。
+
 - jenkins初始密码：c5bd5af9a75c46569b008edfcbe832be
+
