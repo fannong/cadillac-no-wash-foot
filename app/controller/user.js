@@ -87,8 +87,9 @@ class UserController extends BaseController {
   `;
       const userRowDataPacket = await this.app.mysql.query(sql, [theUserTable, username, email]);
       this.ctx.logger.error(userRowDataPacket, "userRowDataPacket");
+      this.ctx.logger.info("userRowDataPacket", userRowDataPacket);
 
-      if (userRowDataPacket) {
+      if (userRowDataPacket && userRowDataPacket.length > 0) {
         this.fail(userRowDataPacket, "username or email is already exist", 500);
         return;
       }
