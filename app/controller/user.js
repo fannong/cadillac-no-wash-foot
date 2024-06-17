@@ -113,8 +113,9 @@ class UserController extends BaseController {
     const userRowDataPacket = await this.app.mysql.get(theUserTable, {
       username: username,
     });
+
     if (!userRowDataPacket) {
-      this.fail(401, "username or password is incorrect");
+      this.fail(401, "i can not find this user");
       return;
     }
 

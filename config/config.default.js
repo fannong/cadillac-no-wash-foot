@@ -1,5 +1,6 @@
 /* eslint valid-jsdoc: "off" */
-
+// 引入path
+const path = require("path");
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -10,7 +11,36 @@ module.exports = (appInfo) => {
    **/
   const config = (exports = {
     logger: {
+      dir: path.join(appInfo.baseDir, "my_log"),
       level: "DEBUG",
+      outputJSON: true,
+    },
+    onerror: {
+      all(err, ctx) {
+        // this.ctx.logger.error("err统一封装", JSON.stringify(err));
+        // 定义所有响应类型的错误处理方法
+        // 定义了 config.all 后，其他错误处理不再生效
+        ctx.body = JSON.stringify({
+          message: err.message,
+          level: err.level,
+          host: err.host,
+        });
+        // ctx.body = "error";
+        ctx.status = 500;
+      },
+      html(err, ctx) {
+        // HTML 错误处理
+        ctx.body = "<h3>error</h3>";
+        ctx.status = 500;
+      },
+      json(err, ctx) {
+        // JSON 错误处理
+        ctx.body = { message: "error" };
+        ctx.status = 500;
+      },
+      jsonp(err, ctx) {
+        // JSONP 错误一般不需特殊处理，自动调用 JSON 方法
+      },
     },
   });
 
@@ -31,6 +61,7 @@ module.exports = (appInfo) => {
       // convert: false,
       // validateRoot: false,
     },
+
     redis: {
       client: {
         port: 6379,

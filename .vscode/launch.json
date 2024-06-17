@@ -34,21 +34,39 @@
 //     }
 //   ]
 // }
-
-
 {
   "version": "0.2.0",
   "configurations": [
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch Egg.js",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": [
-        "run",
-        "dev"
-      ],
-      "port": 9229
-    }
-  ]
+        {
+          "name": "Launch Egg",
+          "type": "node",
+          "request": "launch",
+          "cwd": "${workspaceRoot}",
+          "runtimeExecutable": "npm",
+          "windows": { "runtimeExecutable": "npm.cmd" },
+          "runtimeArgs": [ "run", "debug" ],
+          "console": "integratedTerminal",
+          "protocol": "auto",
+          "restart": true,
+          "port": 9229,
+          "autoAttachChildProcesses": true
+        }
+    ]
 }
+
+// {
+//   "version": "0.2.0",
+//   "configurations": [
+//     {
+//       "type": "node",
+//       "request": "launch",
+//       "name": "Launch Egg.js",
+//       "runtimeExecutable": "npm",
+//       "runtimeArgs": [
+//         "run",
+//         "dev"
+//       ],
+//       "port": 9229
+//     }
+//   ]
+// }

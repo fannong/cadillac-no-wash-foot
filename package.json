@@ -26,6 +26,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
+    "debug": "egg-bin debug",
     "start": "egg-scripts start --daemon --title=egg-server-egg-example-zfr",
     "stop": "egg-scripts stop",
     "dev": "egg-bin dev",
