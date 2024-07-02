@@ -1,0 +1,1 @@
+CREATE TABLE company_child_table (id INT AUTO_INCREMENT PRIMARY KEY, projectName VARCHAR(30), usedSkill VARCHAR(100), projectDesc VARCHAR(999), jobDesc VARCHAR(9999), companyId INT, FOREIGN KEY(companyId) REFERENCES company_main_table(id));

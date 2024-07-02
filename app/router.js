@@ -16,5 +16,12 @@ module.exports = (app) => {
 
   router.post("/admin/create", controller.crud.create);
 
-  router.post('/crud/list', controller.crud.page)
+  router.post("/crud/list", controller.crud.page);
+
+  router.post("/company/create", controller.company.create);
+  router.get("/company/list", controller.company.getList);
+  router.get("/company/detail/:id", controller.company.getDetail);
+
+  router.post('/file/upload', controller.file.upload);
+  router.get('/file/download', controller.file.download);
 };
